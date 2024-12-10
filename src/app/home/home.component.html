@@ -1,8 +1,8 @@
 <ul class="images-container">
-  @for (item of foods; track item) {
+  @for (food of foods; track food) {
   <li>
     <a class="img-anchor">
-      <img src="{{ item }}" alt="Food Image" />
+      <img src="{{ food.imageUrl }}" alt="Food Image" />
     </a>
   </li>
   }
