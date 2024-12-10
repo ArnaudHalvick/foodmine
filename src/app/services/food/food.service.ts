@@ -9,7 +9,7 @@ export class FoodService {
   getAll(): string[] {
     const images: string[] = [];
     for (let i = 1; i <= 6; i++) {
-      images.push(`/assets/images/foods/food-${i}.jpg`);
+      images.push(`/foods/food-${i}.jpg`);
     }
     return images;
   }

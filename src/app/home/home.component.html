@@ -1,1 +1,7 @@
-<p>home works!</p>
+<ul>
+  @for (item of foods; track item) {
+  <li><img src="{{ item }}" alt="Food Image" /></li>
+  } @empty {
+  <li>No food items available</li>
+  }
+</ul>
