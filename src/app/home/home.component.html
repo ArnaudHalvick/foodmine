@@ -1,7 +1,9 @@
-<ul>
+<ul class="images-container">
   @for (item of foods; track item) {
-  <li><img src="{{ item }}" alt="Food Image" /></li>
-  } @empty {
-  <li>No food items available</li>
+  <li>
+    <a class="img-anchor">
+      <img src="{{ item }}" alt="Food Image" />
+    </a>
+  </li>
   }
 </ul>
