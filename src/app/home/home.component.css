@@ -1,55 +1,100 @@
 .images-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
-  list-style-type: none;
-}
-
-.img-anchor {
-  height: 20rem;
-  width: 20rem;
-  border: 1px solid whitesmoke;
-  border-radius: 1rem;
-  margin: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  color: rgb(190, 53, 53);
-}
-
-.img-anchor:hover {
-  opacity: 85%;
-  cursor: pointer;
-}
-
-.food-list {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+  list-style-type: none;
+  padding: 0;
 }
 
 .food-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
   display: flex;
   flex-direction: column;
+  width: 20rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.img-anchor img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem; /* Consistent spacing between sections */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  text-align: center;
-  background: #f9f9f9;
 }
 
-.food-item img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 12px;
+.name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
 }
 
-.food-info h3 {
-  margin: 8px 0;
-  font-size: 18px;
+.favorite {
+  font-size: 1.5rem;
+}
+
+.rating {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.product-item-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.origins span {
+  font-size: 0.9rem;
+}
+
+.cook-time {
+  display: flex;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: rgb(190, 53, 53);
+  margin-top: auto;
+}
+
+.product-item-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Ensure even spacing between origins and cook time */
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.cook-time {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  color: #444; /* Slightly darker for better readability */
+  margin-top: 0.3rem; /* Optional spacing adjustment */
 }

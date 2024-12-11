@@ -1,24 +1,33 @@
 <ul class="images-container">
   @for (food of foods; track food) {
-  <li>
+  <li class="food-item">
     <a class="img-anchor">
       <img src="{{ food.imageUrl }}" alt="Food Image" />
       <div class="content">
-        <div class="name">{{ food.name }}</div>
-        <span class="favorite">{{ food.favorite ? "❤️" : "🤍" }}</span>
-        <app-star-rating
-          [value]="food.stars"
-          [totalStars]="5"
-          [readonly]="false"
-          (rate)="onRate($event, food)"
-        ></app-star-rating>
+        <div class="header">
+          <h3 class="name">{{ food.name }}</h3>
+          <span class="favorite">{{ food.favorite ? "❤️" : "🤍" }}</span>
+        </div>
+        <div class="rating">
+          <app-star-rating
+            [value]="food.stars"
+            [totalStars]="5"
+            [readonly]="false"
+            (rate)="onRate($event, food)"
+          ></app-star-rating>
+        </div>
         <div class="product-item-footer">
           <div class="origins">
+            <strong>Origin: </strong>
             @for (origin of food.origins; track $index) {
             <span>{{ formatOrigin(origin) }}</span>
             @if ($index < food.origins.length - 1) {<span>, </span>} }
           </div>
+          <div class="cook-time">
+            <span>🕒</span> {{ food.cookTime }} minutes
+          </div>
         </div>
+        <div class="price"><strong>Price:</strong> ${{ food.price }}</div>
       </div>
     </a>
   </li>
