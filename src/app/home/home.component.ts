@@ -2,21 +2,37 @@ import { Component, OnInit } from '@angular/core';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { FoodService } from '../services/food/food.service';
 import { Food } from '../shared/models/Food';
+import { ActivatedRoute } from '@angular/router';
+import { SearchComponent } from "../search/search.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [StarRatingComponent],
+  imports: [StarRatingComponent, SearchComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   foods: Food[] = [];
 
-  constructor(private foodService: FoodService) {}
+  constructor(
+    private foodService: FoodService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.foods = this.foodService.getAll();
+    this.route.params.subscribe(params => {
+      const searchTerm = params['searchTerm']; // Access using bracket notation
+      if (searchTerm) {
+        this.foods = this.foodService
+          .getAll()
+          .filter(food =>
+            food.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+      } else {
+        this.foods = this.foodService.getAll(); // Default behavior
+      }
+    });
   }
 
   onRate(newRating: number, food: Food) {
