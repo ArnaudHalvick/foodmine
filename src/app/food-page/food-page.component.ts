@@ -34,12 +34,10 @@ export class FoodPageComponent implements OnInit {
   }
 
   onRate(newRating: number): void {
-    console.log(`New rating for ${this.food.name}: ${newRating}`);
     this.food.stars = newRating; // Update rating
   }
 
   toggleFavorite(): void {
     this.food.favorite = !this.food.favorite;
-    console.log(`${this.food.name} favorite status: ${this.food.favorite}`);
   }
 }

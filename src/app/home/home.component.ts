@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
   }
 
   onRate(newRating: number, food: Food) {
-    console.log(`New rating for ${food.name}: ${newRating}`);
     food.stars = newRating;
   }
 
