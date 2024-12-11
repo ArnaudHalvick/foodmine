@@ -1,0 +1,34 @@
+.tags-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.tag-item {
+  text-decoration: none;
+  color: #fff;
+  background-color: rgb(212, 89, 89);
+  padding: 8px 15px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tag-item:hover {
+  background-color: #a02222;
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tag-item:active {
+  transform: scale(0.95);
+}
+
+.tag-item:visited {
+  color: #ddd;
+}
