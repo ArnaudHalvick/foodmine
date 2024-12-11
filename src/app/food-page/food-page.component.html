@@ -1,6 +1,9 @@
 <div class="food-page">
   <div class="food-header">
     <h1>{{ food.name }}</h1>
+    <button class="favorite-btn" (click)="toggleFavorite()">
+      {{ food.favorite ? "❤️ Favorite" : "🤍 Add to Favorites" }}
+    </button>
   </div>
   <img [src]="food.imageUrl" [alt]="food.name" class="food-image" />
   <div class="food-details">
@@ -10,6 +13,15 @@
     </div>
     <div class="food-detail">
       <strong>Origin:</strong> {{ formattedOrigins }}
+    </div>
+    <div class="food-detail">
+      <strong>Rating:</strong>
+      <app-star-rating
+        [value]="food.stars"
+        [totalStars]="5"
+        [readonly]="false"
+        (rate)="onRate($event)"
+      ></app-star-rating>
     </div>
     <div class="food-tags">
       <strong>Tags:</strong>

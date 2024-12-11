@@ -1,0 +1,65 @@
+.food-page {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.food-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.food-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.favorite-btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff6b6b;
+  color: #fff;
+  cursor: pointer;
+}
+
+.favorite-btn:hover {
+  background-color: #ff4b4b;
+}
+
+.food-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.food-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.food-detail {
+  font-size: 16px;
+}
+
+.food-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  font-size: 14px;
+}
