@@ -40,4 +40,8 @@ export class FoodPageComponent implements OnInit {
   toggleFavorite(): void {
     this.food.favorite = !this.food.favorite;
   }
+
+  addToCart(): void {
+    console.log(`${this.food.name} added to cart!`);
+  }
 }
