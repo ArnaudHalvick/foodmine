@@ -15,7 +15,7 @@ export class FoodService {
     // Collect all tags and count their occurrences
     allFoods.forEach(food => {
       food.tags?.forEach(tag => {
-        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        tagCounts[tag.toLowerCase()] = (tagCounts[tag.toLowerCase()] || 0) + 1;
       });
     });
 
@@ -26,7 +26,7 @@ export class FoodService {
     }));
 
     // Add a special "All" tag at the beginning
-    tags.unshift({ name: 'All', count: allFoods.length });
+    tags.unshift({ name: 'all', count: allFoods.length });
 
     return tags;
   }
@@ -37,6 +37,19 @@ export class FoodService {
       : this.getAll().filter(food =>
           food.tags?.some(t => t.toLowerCase() === tag.toLowerCase())
         );
+  }
+
+  getAllFoodsBySearchTerm(searchTerm: string): Food[] {
+    return this.getAll().filter(food =>
+      food.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  formatOrigin(origin: string): string {
+    return origin
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   getAll(): Food[] {
