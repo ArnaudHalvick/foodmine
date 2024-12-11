@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { FoodService } from '../services/food/food.service';
 import { Food } from '../shared/models/Food';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SearchComponent } from '../search/search.component';
 import { TagsComponent } from '../tags/tags.component';
 import { Tag } from '../shared/models/Tag';
@@ -10,7 +10,7 @@ import { Tag } from '../shared/models/Tag';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [StarRatingComponent, SearchComponent, TagsComponent],
+  imports: [StarRatingComponent, SearchComponent, TagsComponent, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

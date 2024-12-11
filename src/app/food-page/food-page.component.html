@@ -1,0 +1,21 @@
+<div class="food-page">
+  <div class="food-header">
+    <h1>{{ food.name }}</h1>
+  </div>
+  <img [src]="food.imageUrl" [alt]="food.name" class="food-image" />
+  <div class="food-details">
+    <div class="food-detail"><strong>Price:</strong> ${{ food.price }}</div>
+    <div class="food-detail">
+      <strong>Cook Time:</strong> {{ food.cookTime }} minutes
+    </div>
+    <div class="food-detail">
+      <strong>Origin:</strong> {{ formattedOrigins }}
+    </div>
+    <div class="food-tags">
+      <strong>Tags:</strong>
+      @for (tag of food.tags; track $index) {
+      <span class="tag">{{ tag }}</span>
+      }
+    </div>
+  </div>
+</div>

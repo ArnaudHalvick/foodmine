@@ -3,7 +3,7 @@
 <ul class="images-container">
   @for (food of foods; track food) {
   <li class="food-item">
-    <a class="img-anchor">
+    <a class="img-anchor" [routerLink]="['/food', food.id]">
       <img src="{{ food.imageUrl }}" alt="Food Image" />
       <div class="content">
         <div class="header">
