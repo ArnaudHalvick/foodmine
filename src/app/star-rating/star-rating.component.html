@@ -1,0 +1,10 @@
+<div class="star-rating">
+  <i
+    *ngFor="let star of starsArray; let i = index"
+    class="star"
+    [class.filled]="i < value"
+    (click)="onRate(i + 1)"
+  >
+    ★
+  </i>
+</div>
