@@ -5,6 +5,7 @@ import { Food } from '../shared/models/Food';
 import { ActivatedRoute } from '@angular/router';
 import { SearchComponent } from '../search/search.component';
 import { TagsComponent } from '../tags/tags.component';
+import { Tag } from '../shared/models/Tag';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { TagsComponent } from '../tags/tags.component';
 })
 export class HomeComponent implements OnInit {
   foods: Food[] = [];
+  tags: Tag[] = [];
 
   constructor(
     private foodService: FoodService,
@@ -22,17 +24,20 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const searchTerm = params['searchTerm'];
-      const tag = params['tag'];
+    this.foodService.loadFoods().subscribe(foods => {
+      this.foods = foods;
+      this.tags = this.foodService.getAllTags(); // Populate tags after foods are loaded
 
-      if (searchTerm) {
-        this.foods = this.foodService.getAllFoodsBySearchTerm(searchTerm);
-      } else if (tag) {
-        this.foods = this.foodService.getAllFoodsByTag(tag);
-      } else {
-        this.foods = this.foodService.getAll();
-      }
+      this.route.params.subscribe(params => {
+        const searchTerm = params['searchTerm'];
+        const tag = params['tag'];
+
+        if (searchTerm) {
+          this.foods = this.foodService.getAllFoodsBySearchTerm(searchTerm);
+        } else if (tag) {
+          this.foods = this.foodService.getAllFoodsByTag(tag);
+        }
+      });
     });
   }
 
