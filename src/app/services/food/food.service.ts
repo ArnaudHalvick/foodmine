@@ -1,11 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Food } from '../../shared/models/Food';
+import { Tag } from '../../shared/models/Tag';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FoodService {
   constructor() {}
+
+  getAllTags(): Tag[] {
+    const allFoods = this.getAll();
+    const tagCounts: { [key: string]: number } = {};
+
+    // Collect all tags and count their occurrences
+    allFoods.forEach(food => {
+      food.tags?.forEach(tag => {
+        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
+    });
+
+    // Convert the counts into an array of Tag objects
+    const tags: Tag[] = Object.entries(tagCounts).map(([tag, count]) => ({
+      name: tag,
+      count,
+    }));
+
+    // Add a special "All" tag at the beginning
+    tags.unshift({ name: 'All', count: allFoods.length });
+
+    return tags;
+  }
+
+  getAllFoodsByTag(tag: string): Food[] {
+    return tag.toLowerCase() === 'all'
+      ? this.getAll()
+      : this.getAll().filter(food =>
+          food.tags?.some(t => t.toLowerCase() === tag.toLowerCase())
+        );
+  }
 
   getAll(): Food[] {
     return [
@@ -78,9 +110,3 @@ export class FoodService {
     ];
   }
 }
-
-// const images: string[] = [];
-// for (let i = 1; i <= 6; i++) {
-//   images.push(`/foods/food-${i}.jpg`);
-// }
-// return images;

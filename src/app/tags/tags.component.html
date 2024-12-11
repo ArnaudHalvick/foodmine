@@ -1,0 +1,5 @@
+<div>
+  @if (tags.length > 0) { @for (tag of tags; track $index) {
+  <a [routerLink]="['/tag', tag.name]"> {{ tag.name }} ({{ tag.count }}) </a>
+  } }
+</div>
