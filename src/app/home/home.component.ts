@@ -23,4 +23,11 @@ export class HomeComponent implements OnInit {
     console.log(`New rating for ${food.name}: ${newRating}`);
     food.stars = newRating; // Update the rating in the data model
   }
+
+  formatOrigin(origin: string): string {
+    return origin
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
 }

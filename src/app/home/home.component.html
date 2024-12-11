@@ -12,6 +12,13 @@
           [readonly]="false"
           (rate)="onRate($event, food)"
         ></app-star-rating>
+        <div class="product-item-footer">
+          <div class="origins">
+            @for (origin of food.origins; track $index) {
+            <span>{{ formatOrigin(origin) }}</span>
+            @if ($index < food.origins.length - 1) {<span>, </span>} }
+          </div>
+        </div>
       </div>
     </a>
   </li>
