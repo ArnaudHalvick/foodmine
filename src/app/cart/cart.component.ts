@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Food } from '../shared/models/Food';
 import { CartService } from '../services/cart/cart.service';
-
-interface CartItem {
-  food: Food;
-  quantity: number;
-}
+import { CartItem } from '../shared/models/cartIem';
 
 @Component({
   selector: 'app-cart',
