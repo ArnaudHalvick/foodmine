@@ -1,33 +1,86 @@
+/* General header styling */
 header {
   background: white;
   border-bottom: 1px solid rgb(134, 34, 34);
+  padding: 0.5em 1em;
 }
 
 a {
   color: rgb(190, 53, 53);
+  text-decoration: none;
+  display: inline-block; /* Ensures consistent box model for hover effect */
+  padding: 0.5em 1em; /* Add uniform padding to all links */
 }
 
 a:hover {
   background: rgb(190, 53, 53);
   color: white;
+  border-radius: 4px;
 }
 
 .container {
-  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Align logo to the left, links to the right */
+  align-items: center;
 }
 
+/* Logo styling */
 .logo-link {
   font-weight: bold;
-  padding: 1em;
+  font-size: 1.2em;
 }
 
-nav ul {
-  list-style-type: none;
+/* Navigation links styling */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5em; /* Adds spacing between links */
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links > li {
+  position: relative;
+}
+
+/* Dropdown menu styling */
+.menu-container {
+  position: relative;
+}
+
+.menu {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Position it below the "John" link */
+  right: 0;
+  background: white;
+  border: 1px solid rgb(134, 34, 34);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.5em 0;
+  z-index: 10;
+}
+
+.menu a {
+  display: block;
+  padding: 0.5em 1em;
+  color: rgb(190, 53, 53);
+  text-align: left;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.menu a:hover {
+  background: rgb(190, 53, 53);
+  color: white;
+}
+
+/* Show menu on hover */
+.menu-container:hover .menu {
+  display: flex;
+  flex-direction: column; /* Vertical layout for menu items */
 }
 
 .cart-link {
-  display: inline-block;
-  padding: 1em;
+  padding: 0.5em 1em; /* Ensures consistent size with other links */
 }
