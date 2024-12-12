@@ -1,4 +1,4 @@
-/* General Cart Styles */
+/* Overall Cart Container */
 .cart {
   max-width: 700px;
   margin: 30px auto;
@@ -25,6 +25,35 @@
   color: #888;
 }
 
+/* Cart Header (Column Labels) */
+.cart-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #555;
+  border-bottom: 2px solid #ddd;
+  padding: 10px 0;
+  margin-bottom: 15px;
+}
+
+.header-item {
+  text-align: left;
+}
+
+.header-price {
+  text-align: left; /* Align "Price" header to the right */
+}
+
+.header-quantity {
+  text-align: center; /* Center if desired, can also be left or right */
+}
+
+.header-subtotal {
+  text-align: right; /* Align "Subtotal" header to the right */
+}
+
 /* Cart Items List */
 .cart-items {
   list-style-type: none;
@@ -33,9 +62,9 @@
 }
 
 .cart-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -48,6 +77,13 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* Item Info (Image + Name) */
+.cart-item-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .cart-item-image {
   width: 60px;
   height: 60px;
@@ -55,41 +91,30 @@
   object-fit: cover;
 }
 
-.cart-item-details {
-  flex: 1;
-  margin-left: 15px;
-  display: flex;
-  flex-direction: column;
-}
-
 .cart-item-name {
   font-size: 18px;
-  margin: 0 0 5px;
+  margin: 0;
   color: #333;
   font-weight: bold;
 }
 
-.cart-item-price-subtotal {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
-  gap: 10px;
+/* Price Column - align text to the right */
+.cart-item-price {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  text-align: left; /* Align price value to the right */
 }
 
-.cart-item-price,
-.cart-item-subtotal {
-  font-size: 14px;
-  color: #666;
-  margin: 0;
-}
-
-/* Cart Actions */
-.cart-item-actions {
+/* Quantity + Actions */
+.cart-item-quantity-actions {
   display: flex;
   align-items: center;
   gap: 10px;
+  justify-content: center; /* Center these actions */
 }
 
-.cart-item-actions button {
+.cart-item-quantity-actions button {
   background-color: rgb(190, 53, 53);
   color: #fff;
   border: none;
@@ -101,7 +126,7 @@
   transition: all 0.3s ease;
 }
 
-.cart-item-actions button:hover {
+.cart-item-quantity-actions button:hover {
   background-color: #a02222;
 }
 
@@ -119,17 +144,25 @@
   background-color: #ff4b4b;
 }
 
+/* Subtotal Column - align text to the right */
+.cart-item-subtotal {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  text-align: right; /* Align subtotal value to the right */
+}
+
 /* Total Price */
 .cart-total {
   text-align: right;
-  margin-top: 30px; /* Add spacing above the total section */
+  margin-top: 30px;
   font-size: 18px;
   font-weight: bold;
   color: #333;
 }
 
 .clear-btn {
-  margin-top: 10px; /* Add spacing above the clear cart button */
+  margin-top: 10px;
   background-color: rgb(190, 53, 53);
   color: #fff;
   border: none;
