@@ -44,6 +44,10 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.cart-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
 .cart-item-image {
   width: 60px;
   height: 60px;
@@ -54,6 +58,8 @@
 .cart-item-details {
   flex: 1;
   margin-left: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-item-name {
@@ -61,6 +67,12 @@
   margin: 0 0 5px;
   color: #333;
   font-weight: bold;
+}
+
+.cart-item-price-subtotal {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 10px;
 }
 
 .cart-item-price,
@@ -87,6 +99,10 @@
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.cart-item-actions button:hover {
+  background-color: #a02222;
 }
 
 .cart-item-quantity {
@@ -127,9 +143,4 @@
 
 .clear-btn:hover {
   background-color: #a02222;
-  transform: scale(1.05);
-}
-
-.clear-btn:active {
-  transform: scale(0.95);
 }

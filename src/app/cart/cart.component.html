@@ -15,10 +15,12 @@
       />
       <div class="cart-item-details">
         <h4 class="cart-item-name">{{ item.food.name }}</h4>
-        <p class="cart-item-price">Price: ${{ item.food.price }}</p>
-        <p class="cart-item-subtotal">
-          Subtotal: ${{ item.food.price * item.quantity }}
-        </p>
+        <div class="cart-item-price-subtotal">
+          <span class="cart-item-price">Price: ${{ item.food.price }}</span>
+          <span class="cart-item-subtotal">
+            Subtotal: ${{ item.food.price * item.quantity }}
+          </span>
+        </div>
       </div>
       <div class="cart-item-actions">
         <button (click)="updateQuantity(item.food.id, item.quantity - 1)">
