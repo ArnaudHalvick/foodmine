@@ -1,5 +1,12 @@
 <app-search></app-search>
 <app-tags [tags]="tags"></app-tags>
+
+@if (foods.length === 0) {
+<div class="not-found">
+  <p>No foods found for your search term. Try a different search!</p>
+</div>
+}
+
 <ul class="images-container">
   @for (food of foods; track food) {
   <li class="food-item">

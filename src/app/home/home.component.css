@@ -98,3 +98,18 @@
   color: #444; /* Slightly darker for better readability */
   margin-top: 0.3rem; /* Optional spacing adjustment */
 }
+
+.not-found {
+  text-align: center;
+  font-size: 18px;
+  color: #5f5f5f;
+  margin-top: 2.5em;
+}
+
+.not-found p {
+  padding: 1em;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: inline-block;
+}
