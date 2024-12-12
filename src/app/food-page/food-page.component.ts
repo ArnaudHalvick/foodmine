@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Food } from '../shared/models/Food';
 import { FoodService } from '../services/food/food.service';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
+import { CartService } from '../services/cart/cart.service';
 
 @Component({
   selector: 'app-food-page',
@@ -17,7 +18,8 @@ export class FoodPageComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private foodService: FoodService
+    private foodService: FoodService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,6 @@ export class FoodPageComponent implements OnInit {
   }
 
   addToCart(): void {
-    console.log(`${this.food.name} added to cart!`);
+    this.cartService.addToCart(this.food); // Add item to the cart
   }
 }
