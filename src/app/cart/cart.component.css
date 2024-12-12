@@ -1,6 +1,6 @@
 /* Overall Cart Container */
 .cart {
-  max-width: 700px;
+  max-width: 70%;
   margin: 30px auto;
   padding: 20px;
   border: 1px solid rgb(134, 34, 34);
