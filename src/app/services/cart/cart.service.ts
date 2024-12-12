@@ -29,11 +29,16 @@ export class CartService {
   }
 
   updateQuantity(foodId: number, quantity: number): void {
-    const item = this.cartItems.find(item => item.food.id === foodId);
-    if (item) {
-      item.quantity = quantity > 0 ? quantity : 1; // Ensure quantity is at least 1
+    const itemIndex = this.cartItems.findIndex(item => item.food.id === foodId);
+    if (itemIndex > -1) {
+      if (quantity <= 0) {
+        // Remove the item if quantity is 0 or less
+        this.cartItems.splice(itemIndex, 1);
+      } else {
+        this.cartItems[itemIndex].quantity = quantity;
+      }
+      this.cartItemsSubject.next([...this.cartItems]); // Notify subscribers
     }
-    this.cartItemsSubject.next([...this.cartItems]);
   }
 
   removeFromCart(foodId: number): void {
