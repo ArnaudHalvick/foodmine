@@ -1,32 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Food } from '../shared/models/Food';
 import { CartService } from '../services/cart/cart.service';
-import { CommonModule } from '@angular/common';
+
+interface CartItem {
+  food: Food;
+  quantity: number;
+}
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  cartItems: Food[] = [];
+  cartItems: CartItem[] = [];
+  totalPrice: number = 0;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
+      this.calculateTotalPrice();
     });
+  }
+
+  updateQuantity(foodId: number, quantity: number): void {
+    this.cartService.updateQuantity(foodId, quantity);
+    this.calculateTotalPrice();
   }
 
   removeItem(foodId: number): void {
     this.cartService.removeFromCart(foodId);
+    this.calculateTotalPrice();
   }
 
   clearCart(): void {
     this.cartService.clearCart();
+    this.calculateTotalPrice();
+  }
+
+  calculateTotalPrice(): void {
+    this.totalPrice = this.cartService.getTotalPrice();
   }
 }
