@@ -1,0 +1,6 @@
+{
+  "hosting": {
+    "public": "/dist/foodmine-course/browser",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  }
+}
