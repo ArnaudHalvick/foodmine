@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 
 interface User {
   name: string;
   email: string;
   username: string;
-  password?: string; // Password is optional for display but required for signup
+  password: string;
 }
 
 @Component({
@@ -33,11 +33,11 @@ export class SignupComponent {
       next: response => {
         console.log('Signup successful', response);
         this.errorMessage = null;
-        this.router.navigate(['/login']); // Redirect to login after successful signup
+        this.router.navigate(['/login']); // Redirect to login after signup
       },
       error: error => {
         console.error('Signup failed', error);
-        this.errorMessage = 'Signup failed. Please check your information.'; // More specific error handling would be ideal
+        this.errorMessage = error.message; // More specific error handling would be ideal
         if (error?.error?.message) {
           this.errorMessage = error.error.message;
         }

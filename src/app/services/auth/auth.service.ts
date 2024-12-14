@@ -1,46 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable, from, throwError } from 'rxjs'; // Import 'from'
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'YOUR_API_ENDPOINT'; // Base API URL
-
-  constructor(private http: HttpClient) {}
+  constructor(private afAuth: AngularFireAuth) {}
 
   login(credentials: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
-      // Use template literals
-      tap(response => {
-        localStorage.setItem('token', response.token);
-      }),
-      catchError(this.handleError<any>('login', null))
+    return from(
+      this.afAuth.signInWithEmailAndPassword(
+        credentials.username,
+        credentials.password
+      )
+    ).pipe(
+      map(response => response.user),
+      catchError(this.handleError)
     );
   }
 
   signup(user: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/signup`, user).pipe(
-      // New signup method
-      catchError(this.handleError<any>('signup', null))
-    );
+    return from(
+      this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+    ).pipe(catchError(this.handleError));
   }
 
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   *
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
+  logout(): Observable<void> {
+    // Return Observable<void> for logout
+    return from(this.afAuth.signOut()).pipe(catchError(this.handleError));
+  }
 
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+  // Handle errors
+  private handleError(error: any) {
+    console.error('Auth error:', error);
+    return throwError(() => new Error(error.message)); // Use throwError with a factory function
   }
 }

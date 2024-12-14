@@ -1,8 +1,7 @@
-// login.component.ts
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { FormsModule } from '@angular/forms';
 
 interface Credentials {
   username: string;
@@ -13,7 +12,7 @@ interface Credentials {
   selector: 'app-login',
   imports: [FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'], // Create a CSS file for styling
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   credentials: Credentials = {
@@ -26,16 +25,14 @@ export class LoginComponent {
 
   login() {
     this.authService.login(this.credentials).subscribe({
-      next: response => {
-        // Handle successful login (e.g., store token, redirect)
-        console.log('Login successful', response);
+      next: user => {
+        console.log('Login successful', user);
         this.errorMessage = null;
-        this.router.navigate(['/']); // Navigate to a protected route
+        this.router.navigate(['/dashboard']); // Redirect to protected route
       },
       error: error => {
-        // Handle login error
         console.error('Login failed', error);
-        this.errorMessage = 'Invalid username or password.'; // Or a more specific message
+        this.errorMessage = error.message; // Display more specific error message
       },
     });
   }
