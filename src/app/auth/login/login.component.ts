@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
 
 interface Credentials {
   username: string;
@@ -10,7 +11,8 @@ interface Credentials {
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -24,16 +26,19 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    this.authService.login(this.credentials).subscribe({
-      next: user => {
-        console.log('Login successful', user);
+    this.authService
+      .login({
+        username: this.credentials.username,
+        password: this.credentials.password,
+      })
+      .then(userCredential => {
+        console.log('Login successful', userCredential);
         this.errorMessage = null;
         this.router.navigate(['/']); // Redirect to protected route
-      },
-      error: error => {
+      })
+      .catch(error => {
         console.error('Login failed', error);
         this.errorMessage = error.message; // Display more specific error message
-      },
-    });
+      });
   }
 }

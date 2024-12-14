@@ -13,6 +13,7 @@ interface User {
 
 @Component({
   selector: 'app-signup',
+  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
@@ -29,19 +30,19 @@ export class SignupComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   signup() {
-    this.authService.signup(this.user).subscribe({
-      next: response => {
-        console.log('Signup successful', response);
+    this.authService
+      .signup({
+        email: this.user.email,
+        password: this.user.password,
+      })
+      .then(userCredential => {
+        console.log('Signup successful', userCredential);
         this.errorMessage = null;
         this.router.navigate(['/login']); // Redirect to login after signup
-      },
-      error: error => {
+      })
+      .catch(error => {
         console.error('Signup failed', error);
-        this.errorMessage = error.message; // More specific error handling would be ideal
-        if (error?.error?.message) {
-          this.errorMessage = error.error.message;
-        }
-      },
-    });
+        this.errorMessage = error.message;
+      });
   }
 }

@@ -1,38 +1,35 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import { AuthService } from './auth.service';
-import { firstValueFrom } from 'rxjs';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+export const authGuard: CanActivateFn = (route, state) => {
+  const auth = inject(Auth);
+  const router = inject(Router);
 
-  async canActivate(): Promise<boolean> {
-    const user = await firstValueFrom(this.authService.user$);
-    if (user) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
-  }
-}
+  return new Promise(resolve => {
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        resolve(true);
+      } else {
+        router.navigate(['/login']);
+        resolve(false);
+      }
+    });
+  });
+};
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ReverseAuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+export const reverseAuthGuard: CanActivateFn = (route, state) => {
+  const auth = inject(Auth);
+  const router = inject(Router);
 
-  async canActivate(): Promise<boolean> {
-    const user = await firstValueFrom(this.authService.user$);
-    if (!user) {
-      return true;
-    } else {
-      this.router.navigate(['/']);
-      return false;
-    }
-  }
-}
+  return new Promise(resolve => {
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        resolve(true);
+      } else {
+        router.navigate(['/']);
+        resolve(false);
+      }
+    });
+  });
+};
