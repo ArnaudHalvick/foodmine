@@ -28,7 +28,7 @@ export class LoginComponent {
       next: user => {
         console.log('Login successful', user);
         this.errorMessage = null;
-        this.router.navigate(['/dashboard']); // Redirect to protected route
+        this.router.navigate(['/']); // Redirect to protected route
       },
       error: error => {
         console.error('Login failed', error);

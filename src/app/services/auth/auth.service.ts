@@ -1,40 +1,48 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, from, throwError } from 'rxjs'; // Import 'from'
+import { Observable, from, of, switchMap, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth) {}
+  user$: Observable<firebase.User | null>;
 
-  login(credentials: any): Observable<any> {
+  constructor(private afAuth: AngularFireAuth) {
+    this.user$ = this.afAuth.authState.pipe(
+      map(user => (user ? user : null)) // Ensure consistent null value
+    );
+  }
+
+  login(credentials: any): Observable<firebase.User | null> {
     return from(
       this.afAuth.signInWithEmailAndPassword(
         credentials.username,
         credentials.password
       )
     ).pipe(
-      map(response => response.user),
+      switchMap(userCredential => of(userCredential.user)), // Extract user or return null
       catchError(this.handleError)
     );
   }
 
-  signup(user: any): Observable<any> {
+  signup(user: any): Observable<firebase.User | null> {
     return from(
       this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
-    ).pipe(catchError(this.handleError));
+    ).pipe(
+      switchMap(userCredential => of(userCredential.user)), // Extract user or return null
+      catchError(this.handleError)
+    );
   }
 
   logout(): Observable<void> {
-    // Return Observable<void> for logout
     return from(this.afAuth.signOut()).pipe(catchError(this.handleError));
   }
 
-  // Handle errors
   private handleError(error: any) {
     console.error('Auth error:', error);
-    return throwError(() => new Error(error.message)); // Use throwError with a factory function
+    return throwError(() => new Error(error.message));
   }
 }

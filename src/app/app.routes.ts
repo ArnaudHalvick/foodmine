@@ -4,6 +4,7 @@ import { FoodPageComponent } from './food-page/food-page.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ReverseAuthGuard } from './services/auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -30,9 +31,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [ReverseAuthGuard], // Prevent logged in user to access this route
   },
   {
     path: 'signup',
     component: SignupComponent,
+    canActivate: [ReverseAuthGuard], // Prevent logged in user to access this route
   },
 ];

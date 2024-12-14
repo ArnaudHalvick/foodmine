@@ -1,6 +1,12 @@
 {
   "hosting": {
     "public": "/dist/foodmine-course/browser",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
