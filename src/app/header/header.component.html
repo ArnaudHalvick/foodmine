@@ -3,18 +3,25 @@
     <a [routerLink]="['/']" class="logo-link">Food Mine!</a>
     <nav>
       <ul class="nav-links">
-        <li>
+        <!-- Links for guests -->
+        <li *ngIf="!(isLoggedIn$ | async)">
           <a [routerLink]="['/login']">Login</a>
           <a [routerLink]="['/signup']">Sign Up</a>
         </li>
-        <li class="menu-container">
-          <a [routerLink]="['/dashboard']" class="menu-toggle">John</a>
+
+        <!-- Links for logged-in users -->
+        <li class="menu-container" *ngIf="isLoggedIn$ | async">
+          <a [routerLink]="['/dashboard']" class="menu-toggle">{{
+            userName$ | async
+          }}</a>
           <div class="menu">
             <a [routerLink]="['/profile']">Profile</a>
             <a [routerLink]="['/orders']">Orders</a>
             <a [routerLink]="['/logout']">Logout</a>
           </div>
         </li>
+
+        <!-- Cart link always visible -->
         <li>
           <a [routerLink]="['/cart']" class="cart-link">Cart</a>
         </li>

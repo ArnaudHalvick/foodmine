@@ -6,6 +6,7 @@ import {
   signOut,
   user,
 } from '@angular/fire/auth';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,8 @@ import {
 export class AuthService {
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
+
+  isLoggedIn$: Observable<boolean> = this.user$.pipe(map(user => !!user));
 
   login(credentials: { username: string; password: string }): Promise<any> {
     return signInWithEmailAndPassword(
