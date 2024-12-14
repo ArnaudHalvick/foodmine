@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs'; // Import of
+import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'YOUR_API_ENDPOINT/login'; // Replace with your API endpoint
+  private apiUrl = 'YOUR_API_ENDPOINT'; // Base API URL
 
   constructor(private http: HttpClient) {}
 
   login(credentials: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, credentials).pipe(
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+      // Use template literals
       tap(response => {
-        // Store token in local storage or session storage
-        localStorage.setItem('token', response.token); // Example
+        localStorage.setItem('token', response.token);
       }),
-      catchError(this.handleError<any>('login', null)) //Improved error handling
+      catchError(this.handleError<any>('login', null))
+    );
+  }
+
+  signup(user: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/signup`, user).pipe(
+      // New signup method
+      catchError(this.handleError<any>('signup', null))
     );
   }
 
