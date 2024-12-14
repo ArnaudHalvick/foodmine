@@ -18,6 +18,50 @@ a:hover {
   border-radius: 4px;
 }
 
+/* Special styles for login and signup buttons */
+.nav-links .login-link,
+.nav-links .signup-link {
+  border: 1px solid rgb(190, 53, 53);
+  border-radius: 4px; /* Add rounded corners */
+  padding: 0.4em 1em; /* Slightly adjust padding for better alignment */
+  font-weight: bold; /* Make the text bolder */
+}
+
+/* Add spacing between login and signup links */
+.nav-links .login-link {
+  margin-right: 1.5em; /* Add space to the right of the Login button */
+}
+
+.nav-links .signup-link {
+  background: rgb(
+    190,
+    53,
+    53
+  ); /* Add a filled background for the signup button */
+  color: white; /* White text for better contrast */
+}
+
+.nav-links .signup-link:hover {
+  background: rgb(134, 34, 34); /* Darker shade on hover */
+}
+
+/* Special styles for logout link */
+.nav-links .logout-link {
+  background: rgb(255, 230, 230); /* Light red background */
+  color: rgb(190, 53, 53);
+  border: 1px solid rgb(190, 53, 53);
+  border-radius: 4px;
+  padding: 0.4em 1em;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nav-links .logout-link:hover {
+  background: rgb(190, 53, 53); /* Darker red on hover */
+  color: white; /* White text on hover */
+}
+
+/* Container styling */
 .container {
   display: flex;
   justify-content: space-between; /* Align logo to the left, links to the right */

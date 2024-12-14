@@ -5,10 +5,9 @@
       <ul class="nav-links">
         <!-- Links for guests -->
         <li *ngIf="!(isLoggedIn$ | async)">
-          <a [routerLink]="['/login']">Login</a>
-          <a [routerLink]="['/signup']">Sign Up</a>
+          <a [routerLink]="['/login']" class="login-link">Login</a>
+          <a [routerLink]="['/signup']" class="signup-link">Sign Up</a>
         </li>
-
         <!-- Links for logged-in users -->
         <li class="menu-container" *ngIf="isLoggedIn$ | async">
           <a [routerLink]="['/dashboard']" class="menu-toggle">{{
@@ -17,7 +16,7 @@
           <div class="menu">
             <a [routerLink]="['/profile']">Profile</a>
             <a [routerLink]="['/orders']">Orders</a>
-            <a [routerLink]="['/logout']">Logout</a>
+            <a [routerLink]="['/logout']" class="logout-link">Logout</a>
           </div>
         </li>
 
