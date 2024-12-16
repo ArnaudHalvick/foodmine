@@ -36,12 +36,10 @@ export class SignupComponent {
         password: this.user.password,
       })
       .then(userCredential => {
-        console.log('Signup successful', userCredential);
         this.errorMessage = null;
         this.router.navigate(['/login']); // Redirect to login after signup
       })
       .catch(error => {
-        console.error('Signup failed', error);
         this.errorMessage = error.message;
       });
   }

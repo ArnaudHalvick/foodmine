@@ -32,12 +32,10 @@ export class LoginComponent {
         password: this.credentials.password,
       })
       .then(userCredential => {
-        console.log('Login successful', userCredential);
         this.errorMessage = null;
         this.router.navigate(['/']); // Redirect to protected route
       })
       .catch(error => {
-        console.error('Login failed', error);
         this.errorMessage = error.message; // Display more specific error message
       });
   }
