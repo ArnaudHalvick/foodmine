@@ -5,7 +5,7 @@ import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { authGuard, reverseAuthGuard } from './services/auth/auth.guard';
-import { LogoutComponent } from './logout/logout.component';
+import { LogoutComponent } from './auth/logout/logout.component';
 
 export const routes: Routes = [
   {
