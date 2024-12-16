@@ -31,7 +31,7 @@ export class LoginComponent {
         username: this.credentials.username,
         password: this.credentials.password,
       })
-      .then(userCredential => {
+      .then(() => {
         this.errorMessage = null;
         this.router.navigate(['/']); // Redirect to protected route
       })

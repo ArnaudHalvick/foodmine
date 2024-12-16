@@ -35,7 +35,7 @@ export class SignupComponent {
         email: this.user.email,
         password: this.user.password,
       })
-      .then(userCredential => {
+      .then(() => {
         this.errorMessage = null;
         this.router.navigate(['/login']); // Redirect to login after signup
       })
