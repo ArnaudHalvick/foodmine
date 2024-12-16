@@ -46,10 +46,59 @@ input[type="password"]:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Subtle focus shadow */
 }
 
-.error-message {
+.error {
   color: #dc3545; /* Red error color */
   margin-top: 5px;
   font-size: 14px;
+}
+
+.password-requirements {
+  margin-top: 10px;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.password-requirements h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #333;
+}
+
+.password-requirements ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.password-requirements li {
+  margin-bottom: 5px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.password-requirements li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.password-requirements li.met::before {
+  color: green;
+}
+
+.password-requirements li.unmet::before {
+  color: red;
+}
+
+.password-requirements li.met {
+  color: green;
+}
+
+.password-requirements li.unmet {
+  color: red;
 }
 
 button {
@@ -75,10 +124,21 @@ button:disabled {
   cursor: default;
 }
 
-/* Responsive adjustments (optional) */
+/* Responsive adjustments */
 @media (max-width: 500px) {
   .signup-container {
     width: 90%;
     margin: 20px auto;
+    padding: 15px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 14px;
+  }
+
+  .password-requirements {
+    font-size: 14px;
   }
 }

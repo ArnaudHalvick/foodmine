@@ -1,6 +1,7 @@
 <div class="signup-container">
   <h2>Sign Up</h2>
-  <form (ngSubmit)="signup()" #signupForm="ngForm">
+
+  <form #signupForm="ngForm" (ngSubmit)="signup()">
     <div class="form-group">
       <label for="name">Name:</label>
       <input
@@ -11,13 +12,10 @@
         required
         #name="ngModel"
       />
-      @if (name.invalid && (name.dirty || name.touched)) {
-      <div class="error-message">
-        @if (name.errors?.['required']) {
-        <div>Name is required.</div>
-        }
-      </div>
-      }
+      @if (name.invalid && (name.dirty || name.touched)) { @if
+      (name.errors?.['required']) {
+      <div class="error">Name is required.</div>
+      } }
     </div>
 
     <div class="form-group">
@@ -31,15 +29,12 @@
         email
         #email="ngModel"
       />
-      @if (email.invalid && (email.dirty || email.touched)) {
-      <div class="error-message">
-        @if (email.errors?.['required']) {
-        <div>Email is required.</div>
-        } @if (email.errors?.['email']) {
-        <div>Invalid email format.</div>
-        }
-      </div>
-      }
+      @if (email.invalid && (email.dirty || email.touched)) { @if
+      (email.errors?.['required']) {
+      <div class="error">Email is required.</div>
+      } @if (email.errors?.['email']) {
+      <div class="error">Invalid email format.</div>
+      } }
     </div>
 
     <div class="form-group">
@@ -52,13 +47,10 @@
         required
         #username="ngModel"
       />
-      @if (username.invalid && (username.dirty || username.touched)) {
-      <div class="error-message">
-        @if (username.errors?.['required']) {
-        <div>Username is required.</div>
-        }
-      </div>
-      }
+      @if (username.invalid && (username.dirty || username.touched)) { @if
+      (username.errors?.['required']) {
+      <div class="error">Username is required.</div>
+      } }
     </div>
 
     <div class="form-group">
@@ -69,21 +61,43 @@
         name="password"
         [(ngModel)]="user.password"
         required
-        minlength="6"
         #password="ngModel"
       />
-      @if (password.invalid && (password.dirty || password.touched)) {
-      <div class="error-message">
-        @if (password.errors?.['required']) {
-        <div>Password is required.</div>
-        } @if (password.errors?.['minlength']) {
-        <div>Password must be at least 6 characters long.</div>
+      @if (password.invalid && (password.dirty || password.touched)) { @if
+      (password.errors?.['required']) {
+      <div class="error">Password is required.</div>
+      } }
+
+      <div class="password-requirements">
+        <h3>Password Requirements:</h3>
+        <ul>
+          @for (req of passwordRequirements; track req.label) {
+          <li
+            class="{{
+              user.password && req.check(user.password) ? 'met' : 'unmet'
+            }}"
+          >
+            {{ req.label }}
+          </li>
+          }
+        </ul>
+
+        @if (passwordValidationErrors.length > 0) {
+        <div class="error">
+          Please meet the following password requirements:
+          <ul>
+            @for (error of passwordValidationErrors; track error) {
+            <li>{{ error }}</li>
+            }
+          </ul>
+        </div>
         }
       </div>
-      }
     </div>
 
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    @if (errorMessage) {
+    <div class="error">{{ errorMessage }}</div>
+    }
 
     <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
   </form>
